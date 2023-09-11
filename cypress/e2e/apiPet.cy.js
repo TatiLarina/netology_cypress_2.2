@@ -9,7 +9,7 @@ describe('pet store api', () => {
     })
   });
 
-  it('should update user', () => {
+  it('should create and update user', () => {
     cy.createUser(id[0], username, firstName, lastName, email, password, phone, userStatus);
     cy.updateUser(id[1], username, firstName, lastName, email, password, phone, userStatus)
     .then((response) => {
@@ -19,12 +19,22 @@ describe('pet store api', () => {
     })
   });
 
-  it('should delete user', () => {
+  it('should create and delete user', () => {
     cy.createUser(id[0], username, firstName, lastName, email, password, phone, userStatus);
     cy.deleteUser(username)
     .then((response) => {
       expect(response.status).to.eq(404);
       expect(response.body.message).to.not.eq("500");
+    });
+  });
+
+  it('should create, update and delete user', () => {
+    cy.createUser(id[0], username, firstName, lastName, email, password, phone, userStatus);
+    cy.updateUser(id[1], username, firstName, lastName, email, password, phone, userStatus);
+    cy.deleteUser(username)
+    .then((response) => {
+      expect(response.status).to.eq(404);
+      expect(response.body.message).to.not.eq("600");
     });
   });
 })

@@ -44,7 +44,7 @@ Cypress.Commands.add("createUser", (id, username, firstName, lastName, email, pa
 Cypress.Commands.add('updateUser', (id, username, firstName, lastName, email, password, phone, userStatus) => {
     cy.request({ 
         method: "PUT", 
-        url: "https://petstore.swagger.io/v2/user/username", 
+        url: "https://petstore.swagger.io/v2/user/${username}", 
         body: { 
             "id": id,
             "username": username,
@@ -62,6 +62,6 @@ Cypress.Commands.add('deleteUser', (username) => {
     cy.request({
         failOnStatusCode: false,
         method: "DELETE",
-        url: "https://petstore.swagger.io/v2/user/username"
+        url: "https://petstore.swagger.io/v2/user/${username}"
     });
 });
